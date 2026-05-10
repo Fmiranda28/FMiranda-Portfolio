@@ -47,29 +47,39 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-white">
-      {/* Dot pattern - Top Right */}
-      <div 
-        className="absolute top-0 right-0 w-1/2 h-1/2"
-        style={{
-          backgroundImage: "radial-gradient(circle, #c5c5c5 2px, transparent 2px)",
-          backgroundSize: "28px 28px",
-          maskImage: "radial-gradient(ellipse at 100% 0%, black 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0.3) 45%, transparent 65%)",
-          WebkitMaskImage: "radial-gradient(ellipse at 100% 0%, black 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0.3) 45%, transparent 65%)",
-        }}
-      />
+      {/* Dot pattern - Top Right (manually coded triangle) */}
+      <div className="absolute top-4 right-4 flex flex-col items-end">
+        {Array.from({ length: 12 }).map((_, rowIndex) => (
+          <div key={rowIndex} className="flex gap-[12px]" style={{ marginBottom: '12px' }}>
+            {Array.from({ length: rowIndex + 1 }).map((_, dotIndex) => (
+              <div
+                key={dotIndex}
+                className="w-[4px] h-[4px] rounded-full bg-neutral-300"
+                style={{
+                  opacity: 1 - (rowIndex * 0.07),
+                }}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
       
-      {/* Dot pattern - Bottom Left */}
-      <div 
-        className="absolute bottom-0 left-0 w-1/2 h-1/2"
-        style={{
-          backgroundImage: "radial-gradient(circle, #c5c5c5 2px, transparent 2px)",
-          backgroundSize: "28px 28px",
-          backgroundPosition: "0px bottom",
-          clipPath: "polygon(0 100%, 100% 100%, 0 0)",
-          maskImage: "linear-gradient(to top right, black 0%, black 50%, transparent 85%)",
-          WebkitMaskImage: "linear-gradient(to top right, black 0%, black 50%, transparent 85%)",
-        }}
-      />
+      {/* Dot pattern - Bottom Left (manually coded triangle) */}
+      <div className="absolute bottom-4 left-4">
+        {Array.from({ length: 12 }).map((_, rowIndex) => (
+          <div key={rowIndex} className="flex gap-[12px]" style={{ marginBottom: '12px' }}>
+            {Array.from({ length: rowIndex + 1 }).map((_, dotIndex) => (
+              <div
+                key={dotIndex}
+                className="w-[4px] h-[4px] rounded-full bg-neutral-300"
+                style={{
+                  opacity: 1 - (rowIndex * 0.07),
+                }}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
 
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20 px-6 max-w-5xl mx-auto">
         {/* Profile Image */}
