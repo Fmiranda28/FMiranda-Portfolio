@@ -49,25 +49,23 @@ export function Hero() {
     <section className="relative min-h-screen flex items-center justify-center bg-white">
       {/* Dot pattern - Top Right: right-angle triangle */}
       <div 
-        className="absolute top-0 right-0 w-1/2 h-1/2"
+        className="absolute top-0 right-0 w-2/3 h-2/3"
         style={{
-          backgroundImage: "radial-gradient(circle, #c5d0dc 2.5px, transparent 2.5px)",
-          backgroundSize: "32px 32px",
-          clipPath: "polygon(100% 0, 100% 100%, 0 0)",
-          maskImage: "linear-gradient(to bottom left, black 0%, black 40%, transparent 80%)",
-          WebkitMaskImage: "linear-gradient(to bottom left, black 0%, black 40%, transparent 80%)",
+          backgroundImage: "radial-gradient(circle, #c5d0dc 2px, transparent 2px)",
+          backgroundSize: "28px 28px",
+          maskImage: "radial-gradient(ellipse at 100% 0%, black 0%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.3) 40%, transparent 70%)",
+          WebkitMaskImage: "radial-gradient(ellipse at 100% 0%, black 0%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.3) 40%, transparent 70%)",
         }}
       />
       
       {/* Dot pattern - Bottom Left: right-angle triangle */}
       <div 
-        className="absolute bottom-0 left-0 w-1/2 h-1/2"
+        className="absolute bottom-0 left-0 w-2/3 h-2/3"
         style={{
-          backgroundImage: "radial-gradient(circle, #c5d0dc 2.5px, transparent 2.5px)",
-          backgroundSize: "32px 32px",
-          clipPath: "polygon(0 100%, 0 0, 100% 100%)",
-          maskImage: "linear-gradient(to top right, black 0%, black 40%, transparent 80%)",
-          WebkitMaskImage: "linear-gradient(to top right, black 0%, black 40%, transparent 80%)",
+          backgroundImage: "radial-gradient(circle, #c5d0dc 2px, transparent 2px)",
+          backgroundSize: "28px 28px",
+          maskImage: "radial-gradient(ellipse at 0% 100%, black 0%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.3) 40%, transparent 70%)",
+          WebkitMaskImage: "radial-gradient(ellipse at 0% 100%, black 0%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.3) 40%, transparent 70%)",
         }}
       />
 
