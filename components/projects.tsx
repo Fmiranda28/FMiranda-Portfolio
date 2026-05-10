@@ -19,16 +19,16 @@ const projects = [
 export function Projects() {
   return (
     <section id="projects" className="py-32 px-6 bg-white">
-      <div className="max-w-3xl mx-auto">
-        <p className="text-xs text-neutral-400 uppercase tracking-widest mb-12">
+      <div className="max-w-5xl mx-auto">
+        <h2 className="text-6xl md:text-7xl font-light text-neutral-900 mb-16">
           Projects
-        </p>
+        </h2>
 
-        <div className="space-y-8">
+        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
           {projects.map((project, index) => (
-            <div
+            <button
               key={index}
-              className="group p-6 border border-neutral-100 hover:border-neutral-200 transition-colors"
+              className="group flex-shrink-0 w-72 p-6 border border-neutral-200 hover:border-neutral-400 hover:bg-neutral-50 transition-all text-left cursor-pointer"
             >
               <h3 className="text-neutral-900 mb-2">{project.title}</h3>
               <p className="text-sm text-neutral-500 mb-4">{project.description}</p>
@@ -36,13 +36,13 @@ export function Projects() {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs text-neutral-400 px-2 py-1 bg-neutral-50"
+                    className="text-xs text-neutral-400 px-2 py-1 bg-neutral-100"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
