@@ -48,10 +48,10 @@ export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-white">
       {/* Dot pattern - Top Right (manually coded triangle) */}
-      <div className="absolute top-4 right-4 flex flex-col items-start">
+      <div className="absolute top-4 right-4 flex flex-col items-end">
         {Array.from({ length: 12 }).map((_, rowIndex) => (
           <div key={rowIndex} className="flex gap-[12px]" style={{ marginBottom: '12px' }}>
-            {Array.from({ length: 12 - rowIndex }).map((_, dotIndex) => (
+            {Array.from({ length: rowIndex + 1 }).map((_, dotIndex) => (
               <div
                 key={dotIndex}
                 className="w-[4px] h-[4px] rounded-full bg-neutral-300"
@@ -65,10 +65,10 @@ export function Hero() {
       </div>
       
       {/* Dot pattern - Bottom Left (manually coded triangle) */}
-      <div className="absolute bottom-6 left-4 flex flex-col-reverse items-end">
+      <div className="absolute bottom-6 left-4 flex flex-col-reverse items-start">
         {Array.from({ length: 12 }).map((_, rowIndex) => (
           <div key={rowIndex} className="flex gap-[12px]" style={{ marginBottom: '12px' }}>
-            {Array.from({ length: 12 - rowIndex }).map((_, dotIndex) => (
+            {Array.from({ length: rowIndex + 1 }).map((_, dotIndex) => (
               <div
                 key={dotIndex}
                 className="w-[4px] h-[4px] rounded-full bg-neutral-300"
