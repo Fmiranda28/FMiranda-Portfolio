@@ -64,8 +64,8 @@ export function Hero() {
         style={{
           backgroundImage: "radial-gradient(circle, #c5c5c5 2px, transparent 2px)",
           backgroundSize: "28px 28px",
-          backgroundPosition: "14px calc(100% - 14px)",
-          clipPath: "polygon(0 100%, 0 0, 100% 100%)",
+          backgroundPosition: "0px bottom",
+          clipPath: "polygon(0 100%, 100% 100%, 0 0)",
           maskImage: "linear-gradient(to top right, black 0%, black 50%, transparent 85%)",
           WebkitMaskImage: "linear-gradient(to top right, black 0%, black 50%, transparent 85%)",
         }}
