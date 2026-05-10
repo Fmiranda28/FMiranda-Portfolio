@@ -47,25 +47,25 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-white">
-      {/* Dot pattern - Top Right: right-angle triangle */}
+      {/* Dot pattern - Top Right */}
       <div 
-        className="absolute top-0 right-0 w-2/3 h-2/3"
+        className="absolute top-0 right-0 w-1/3 h-1/3"
         style={{
           backgroundImage: "radial-gradient(circle, #c5d0dc 2px, transparent 2px)",
           backgroundSize: "28px 28px",
-          maskImage: "radial-gradient(ellipse at 100% 0%, black 0%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.3) 40%, transparent 70%)",
-          WebkitMaskImage: "radial-gradient(ellipse at 100% 0%, black 0%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.3) 40%, transparent 70%)",
+          maskImage: "radial-gradient(ellipse at 100% 0%, black 0%, rgba(0,0,0,0.5) 30%, transparent 60%)",
+          WebkitMaskImage: "radial-gradient(ellipse at 100% 0%, black 0%, rgba(0,0,0,0.5) 30%, transparent 60%)",
         }}
       />
       
-      {/* Dot pattern - Bottom Left: right-angle triangle */}
+      {/* Dot pattern - Bottom Left */}
       <div 
-        className="absolute bottom-0 left-0 w-2/3 h-2/3"
+        className="absolute bottom-0 left-0 w-1/3 h-1/3"
         style={{
           backgroundImage: "radial-gradient(circle, #c5d0dc 2px, transparent 2px)",
           backgroundSize: "28px 28px",
-          maskImage: "radial-gradient(ellipse at 0% 100%, black 0%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.3) 40%, transparent 70%)",
-          WebkitMaskImage: "radial-gradient(ellipse at 0% 100%, black 0%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.3) 40%, transparent 70%)",
+          maskImage: "radial-gradient(ellipse at 0% 100%, black 0%, rgba(0,0,0,0.5) 30%, transparent 60%)",
+          WebkitMaskImage: "radial-gradient(ellipse at 0% 100%, black 0%, rgba(0,0,0,0.5) 30%, transparent 60%)",
         }}
       />
 
