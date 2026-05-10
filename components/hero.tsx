@@ -65,9 +65,9 @@ export function Hero() {
       </div>
       
       {/* Dot pattern - Bottom Left (manually coded triangle) */}
-      <div className="absolute bottom-4 left-4">
+      <div className="absolute bottom-6 left-4 flex flex-col-reverse">
         {Array.from({ length: 12 }).map((_, rowIndex) => (
-          <div key={rowIndex} className="flex gap-[12px]" style={{ marginBottom: '12px' }}>
+          <div key={rowIndex} className="flex gap-[12px]" style={{ marginTop: '12px' }}>
             {Array.from({ length: rowIndex + 1 }).map((_, dotIndex) => (
               <div
                 key={dotIndex}
