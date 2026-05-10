@@ -51,7 +51,7 @@ export function Hero() {
       <div 
         className="absolute top-0 right-0 w-1/2 h-1/2"
         style={{
-          backgroundImage: "radial-gradient(circle, #e8f4fc 2px, transparent 2px)",
+          backgroundImage: "radial-gradient(circle, #a8d4f0 2px, transparent 2px)",
           backgroundSize: "28px 28px",
           maskImage: "radial-gradient(ellipse at 100% 0%, black 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0.3) 45%, transparent 65%)",
           WebkitMaskImage: "radial-gradient(ellipse at 100% 0%, black 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0.3) 45%, transparent 65%)",
@@ -62,7 +62,7 @@ export function Hero() {
       <div 
         className="absolute bottom-0 left-0 w-1/2 h-1/2"
         style={{
-          backgroundImage: "radial-gradient(circle, #e8f4fc 2px, transparent 2px)",
+          backgroundImage: "radial-gradient(circle, #a8d4f0 2px, transparent 2px)",
           backgroundSize: "28px 28px",
           maskImage: "radial-gradient(ellipse at 0% 100%, black 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0.3) 45%, transparent 65%)",
           WebkitMaskImage: "radial-gradient(ellipse at 0% 100%, black 0%, rgba(0,0,0,0.6) 25%, rgba(0,0,0,0.3) 45%, transparent 65%)",
