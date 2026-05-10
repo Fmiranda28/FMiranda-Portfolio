@@ -10,7 +10,7 @@ export function Footer() {
           
           <div className="flex items-center gap-6">
             <a
-              href="https://github.com"
+              href="https://github.com/Fmiranda28"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-neutral-400 hover:text-neutral-900 transition-colors"
@@ -18,21 +18,14 @@ export function Footer() {
               GitHub
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/fernando-miranda-7217722b8?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-neutral-400 hover:text-neutral-900 transition-colors"
             >
               LinkedIn
             </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-neutral-400 hover:text-neutral-900 transition-colors"
-            >
-              Twitter
-            </a>
+
           </div>
         </div>
         

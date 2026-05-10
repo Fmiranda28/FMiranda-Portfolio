@@ -9,6 +9,7 @@ const roles = [
   "Project Manager",
   "Team Leader",
   "Game Developer",
+  "IoT Engineer",
 ]
 
 export function Hero() {
