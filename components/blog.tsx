@@ -53,15 +53,15 @@ export function Blog() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-              <span className="text-xs text-neutral-400 uppercase tracking-wide">
-                {post.date}
-              </span>
               <h3 className="text-neutral-900 font-medium mt-2 mb-2 group-hover:text-neutral-600 transition-colors">
                 {post.title}
               </h3>
               <p className="text-sm text-neutral-500 leading-relaxed line-clamp-2">
                 {post.description}
               </p>
+              <span className="text-xs text-neutral-400 uppercase tracking-wide mt-3">
+                {post.date}
+              </span>
             </article>
           ))}
         </div>

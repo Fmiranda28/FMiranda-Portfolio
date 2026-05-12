@@ -96,17 +96,12 @@ export default function BlogPage() {
           >
             <div className="w-full max-w-5xl mx-auto px-6 md:px-12">
               {/* Title */}
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-3 leading-tight">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-6 leading-tight">
                 {post.title}
               </h2>
-              
-              {/* Description */}
-              <p className="text-base md:text-lg text-neutral-600 leading-relaxed mb-6">
-                {post.description}
-              </p>
 
               {/* Image */}
-              <div className="relative aspect-[21/9] overflow-hidden rounded-xl bg-neutral-100 mb-4">
+              <div className="relative aspect-[21/9] overflow-hidden rounded-xl bg-neutral-100 mb-6">
                 <Image
                   src={post.image}
                   alt={post.title}
@@ -114,6 +109,11 @@ export default function BlogPage() {
                   className="object-cover"
                 />
               </div>
+              
+              {/* Description */}
+              <p className="text-base md:text-lg text-neutral-600 leading-relaxed mb-6">
+                {post.description}
+              </p>
 
               {/* Date */}
               <span className="text-sm text-neutral-400 uppercase tracking-wide">

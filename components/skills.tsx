@@ -8,12 +8,20 @@ const skills = [
     items: ["PHP", "Laravel", "Python", "FastAPI", "Node.js", "MySQL", "PostgreSQL", "Firebase", "WebSocket"],
   },
   {
+    category: "IoT & Embedded Systems",
+    items: ["Arduino", "ESP32", "C++", "MicroPython"],
+  },
+  {
     category: "Game Development",
     items: ["Unity", "C#"],
   },
   {
     category: "Tools & Management",
     items: ["Git", "GitHub", "Docker", "Figma", "Jira", "Trello"],
+  },
+  {
+    category: "AI Tools",
+    items: ["ChatGPT", "Claude", "Gemini", "v0", "GitHub Copilot", "Stitch"],
   },
 ]
 
