@@ -4,34 +4,98 @@ import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 
 const projects = [
-  {
-    title: "Project One",
-    description: "A web application built with Next.js and TypeScript.",
-    images: ["/images/grid-lines.png", "/images/fernando.jpg", "/images/dots-pattern.png"],
-    tags: ["Next.js", "TypeScript", "Tailwind"],
-    link: "https://example.com", // remove this line if no link
-  },
-  {
-    title: "Project Two",
-    description: "Cross-platform mobile app using React Native.",
-    images: ["/images/fernando.jpg", "/images/grid-lines.png", "/images/dots-pattern.png"],
-    tags: ["React Native", "Expo", "Firebase"],
-    // no link
-  },
-  {
-    title: "Project Three",
-    description: "Game developed with Unity and C#.",
-    images: ["/images/dots-pattern.png", "/images/grid-lines.png", "/images/fernando.jpg"],
-    tags: ["Unity", "C#", "Game Design"],
-    link: "https://example.com",
-  },
-  {
-    title: "Project Four",
-    description: "Game developed with Unity and C#.",
-    images: ["/images/grid-lines.png", "/images/dots-pattern.png", "/images/fernando.jpg"],
-    tags: ["Unity", "C#", "Game Design"],
-    // no link
-  },
+{
+  title: "Morpolohikal na Estruktura",
+  description:
+    "A web application that explores Gen Z morpolohikal words and slang, helping users understand their meanings and usage.",
+  images: [
+    "/projects-images/Login-MPS.png",
+    "/projects-images/Signup-MPS.png",
+    "/projects-images/1-MPS.png",
+    "/projects-images/2-MPS.png",
+  ],
+  tags: ["Next.js", "TypeScript", "Tailwind CSS", "Web App"],
+},
+{
+  title: "Farmer Picks",
+  description:
+    "An e-commerce platform that connects consumers directly with local farmers for fresh and accessible agricultural products.",
+  images: [
+    "/projects-images/FP1.png",
+    "/projects-images/FP2.png",
+    "/projects-images/FP3.png",
+    "/projects-images/FP4.png",
+    "/projects-images/FP5.png",
+  ],
+  tags: ["React Native", "Expo", "Firebase", "E-commerce"],
+},
+{
+  title: "Jentaime Water Station",
+  description:
+    "A B2B e-commerce platform for water station businesses, streamlining product ordering and customer transactions.",
+  images: [
+    "/projects-images/JW-1.png",
+    "/projects-images/JW-2.png",
+    "/projects-images/JW-3.png",
+    "/projects-images/JW-4.png",
+    "/projects-images/JW-5.png",
+    "/projects-images/JW-6.png",
+    "/projects-images/JW-7.png",
+    "/projects-images/JW-8.png",
+    "/projects-images/JW-9.png",
+    "/projects-images/JW-10.png",
+  ],
+  tags: ["Next.js", "TypeScript", "Tailwind CSS", "E-commerce"],
+},
+{
+  title: "Smart-Farming",
+  description:
+    "A smart farming system with web, mobile, and IoT integration that helps farmers monitor crops and manage agricultural operations efficiently.",
+  images: [
+    "/projects-images/SmartF-1.jpg",
+    "/projects-images/SmartF-2.jpg",
+    "/projects-images/SmartF-3.jpg",
+    "/projects-images/SmartF-4.jpg",
+    "/projects-images/SmartF-5.jpg",
+    "/projects-images/SmartF-6.jpg",
+    "/projects-images/SmartF-7.jpg",
+    "/projects-images/SmartF-8.jpg",
+    "/projects-images/SmartF-9.jpg",
+    "/projects-images/SmartF-10.jpg",
+  ],
+  tags: ["IoT", "Web App", "Mobile App", "Smart Farming"],
+},
+{
+  title: "Wander",
+  description:
+    "A travel and exploration application designed to help users discover destinations, plan trips, and enhance their travel experiences.",
+  images: [
+    "/projects-images/Wander-1.png",
+    "/projects-images/Wander-2.png",
+    "/projects-images/Wander-3.png",
+    "/projects-images/Wander-4.png",
+  ],
+  tags: ["Next.js", "Travel App", "UI/UX", "Web App"],
+},
+{
+  title: "Scrolly-Telling Web",
+  description:
+    "An interactive scrollytelling website that presents immersive visual narratives through animations and dynamic content transitions.",
+  images: [
+    "/projects-images/CITY/CITY1.png",
+    "/projects-images/CITY/CITY2.png",
+    "/projects-images/CITY/CITY3.png",
+    "/projects-images/CITY/CITY4.png",
+  ],
+  tags: ["JavaScript", "GSAP", "Scrollytelling", "Interactive Web"],
+},
+{
+  title: "Flappy Bird Clone",
+  description:
+    "A recreation of the classic Flappy Bird game featuring simple controls, obstacle mechanics, and retro-inspired gameplay.",
+  images: ["/projects-images/BIRD-GAME/flappy-bird.png"],
+  tags: ["Unity", "C#", "2D Game", "Game Development"],
+},
 ]
 
 export function Projects() {
@@ -151,18 +215,8 @@ export function Projects() {
                     {project.description}
                   </p>
 
-                  {/* Project link */}
-                  {"link" in project && project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-neutral-900 text-white text-sm font-medium rounded-full hover:bg-neutral-700 transition-colors duration-200 mb-8"
-                    >
-                      View Project
-                      <span className="text-base leading-none">→</span>
-                    </a>
-                  )}
+     
+
                 </div>
 
                 <div className="flex flex-wrap gap-2">
