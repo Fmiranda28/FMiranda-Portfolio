@@ -9,34 +9,7 @@ const posts = [
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=800&fit=crop",
     readTime: "8 min read",
   },
-  {
-    title: "Leading Remote Teams",
-    date: "Dec 8, 2023",
-    description: "Lessons learned from managing distributed teams across different time zones and cultures. Communication, trust, and async workflows are the pillars of successful remote collaboration. Here's how I built a high-performing remote team from scratch.",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=800&fit=crop",
-    readTime: "6 min read",
-  },
-  {
-    title: "Game Development Journey",
-    date: "Nov 22, 2023",
-    description: "My transition from web development to game development and the skills that transferred over. Unity, C#, and game design principles opened a new world of creative possibilities while leveraging my existing programming expertise.",
-    image: "https://images.unsplash.com/photo-1556438064-2d7646166914?w=1200&h=800&fit=crop",
-    readTime: "10 min read",
-  },
-  {
-    title: "The Future of Mobile Development",
-    date: "Oct 5, 2023",
-    description: "Cross-platform frameworks, native performance, and the evolving mobile landscape. Flutter, React Native, and native development each have their place. Here's my take on choosing the right approach for your next mobile project.",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=800&fit=crop",
-    readTime: "7 min read",
-  },
-  {
-    title: "Project Management for Developers",
-    date: "Sep 18, 2023",
-    description: "Bridging the gap between technical execution and project delivery. Agile methodologies, sprint planning, and stakeholder communication from a developer's perspective. How understanding both sides makes you a better team player.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=800&fit=crop",
-    readTime: "5 min read",
-  },
+
 ]
 
 export default function BlogPage() {

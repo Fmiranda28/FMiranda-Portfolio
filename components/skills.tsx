@@ -5,7 +5,7 @@ const skills = [
   },
   {
     category: "Backend",
-    items: ["PHP", "Laravel", "Python", "FastAPI", "Node.js", "MySQL", "PostgreSQL", "Firebase", "WebSocket"],
+    items: ["PHP", "Laravel", "Python", "FastAPI", "Node.js", "MySQL", "PostgreSQL", "Firebase", "WebSocket", "Supabase"],
   },
   {
     category: "IoT & Embedded Systems",

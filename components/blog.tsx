@@ -7,18 +7,7 @@ const posts = [
     description: "Exploring modern architecture patterns and best practices for building applications that can handle millions of users.",
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop",
   },
-  {
-    title: "Leading Remote Teams",
-    date: "Dec 8, 2023",
-    description: "Lessons learned from managing distributed teams across different time zones and cultures.",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop",
-  },
-  {
-    title: "Game Development Journey",
-    date: "Nov 22, 2023",
-    description: "My transition from web development to game development and the skills that transferred over.",
-    image: "https://images.unsplash.com/photo-1556438064-2d7646166914?w=800&h=600&fit=crop",
-  },
+
 ]
 
 export function Blog() {

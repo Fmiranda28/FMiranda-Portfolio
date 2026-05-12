@@ -10,6 +10,7 @@ const roles = [
   "Team Leader",
   "Game Developer",
   "IoT Engineer",
+  "Founder of FSudoLab.com",
 ]
 
 export function Hero() {
@@ -23,13 +24,11 @@ export function Hero() {
     const pauseTime = 2000
 
     if (!isDeleting && displayText === currentText) {
-      // Finished typing, wait then start deleting
       const timeout = setTimeout(() => setIsDeleting(true), pauseTime)
       return () => clearTimeout(timeout)
     }
 
     if (isDeleting && displayText === "") {
-      // Finished deleting, move to next role
       setIsDeleting(false)
       setCurrentRole((prev) => (prev + 1) % roles.length)
       return
@@ -56,15 +55,13 @@ export function Hero() {
               <div
                 key={dotIndex}
                 className="w-[4px] h-[4px] rounded-full bg-neutral-300"
-                style={{
-                  opacity: 1 - (rowIndex * 0.045),
-                }}
+                style={{ opacity: 1 - (rowIndex * 0.045) }}
               />
             ))}
           </div>
         ))}
       </div>
-      
+
       {/* Dot pattern - Bottom Left (manually coded triangle) */}
       <div className="absolute bottom-6 left-4 flex flex-col items-start">
         {Array.from({ length: 18 }).map((_, rowIndex) => (
@@ -73,9 +70,7 @@ export function Hero() {
               <div
                 key={dotIndex}
                 className="w-[4px] h-[4px] rounded-full bg-neutral-300"
-                style={{
-                  opacity: 1 - (rowIndex * 0.045),
-                }}
+                style={{ opacity: 1 - (rowIndex * 0.045) }}
               />
             ))}
           </div>
@@ -110,10 +105,12 @@ export function Hero() {
 
           <div className="flex items-center justify-center md:justify-start gap-6">
             <a
-              href="#about"
-              className="text-sm text-neutral-900 border-b border-neutral-900 pb-0.5 hover:text-neutral-600 hover:border-neutral-600 transition-colors"
+              href="https://fsudolab.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-neutral-900 hover:text-neutral-500 transition-colors"
             >
-              About me
+              FSudoLab
             </a>
             <a
               href="/resume.pdf"
