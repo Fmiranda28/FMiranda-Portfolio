@@ -5,12 +5,46 @@ import Link from "next/link"
 import { useState } from "react"
 
 const posts = [
+
+    {
+      title: "Project Management Fundamentals Course Completion",
+      date: "March 3, 2026",
+      description:
+        "Fernando Miranda completed a comprehensive Project Management Fundamentals course, gaining essential skills in project planning, execution, and leadership. The course covered key concepts such as project lifecycle, risk management, stakeholder communication, and team collaboration, equipping Fernando with the knowledge to effectively manage projects and lead teams to successful outcomes.",
+      image: "/blog-images/FM-Certificate3.png",
+    },
+
+    {
+      title: "Fernando Lands Job at CountPro",
+      date: "February 10, 2026",
+      description:
+        "Fernando Miranda secured a position as a Web App Developer at CountPro, a company specializing in web solutions and digital services. In this role, Fernando is responsible for designing and developing responsive",
+      image: "/blog-images/CountPro-Company.jpg",
+    },
+
+
     {
       title: "Fernando Founds FSudoLab",
       date: "January 10, 2026",
       description:
         "Fernando Miranda founded FSudoLab, a development-focused initiative that provides web solutions and digital services for clients. The lab specializes in building responsive websites and modern web applications, delivering functional, user-friendly, and scalable systems tailored to client needs.",
       image: "/blog-images/FSudoLab.png",
+    },
+
+    {
+      title: "Blockchain Essentials for Higher Education Workforce",
+      date: "September 10, 2022",
+      description:
+        "Fernando Miranda completed the 'Blockchain Essentials for Higher Education Workforce' course, gaining foundational knowledge of blockchain technology, its applications in education, and how it can be leveraged to enhance learning experiences and administrative processes in higher education institutions.",
+      image: "/blog-images/FM-Certificate1.png",
+    },
+
+    {
+      title: "Fernando GDSC Membership at NU Baliwag",
+      date: "September 10, 2022",
+      description:
+        "Fernando Miranda became a member of the Google Developer Student Club (GDSC) at NU Baliwag, where he engaged in various technical activities and events to enhance his skills and knowledge in software development.",
+      image: "/blog-images/FM-Certificate2.png",
     },
 
     {
