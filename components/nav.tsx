@@ -42,7 +42,7 @@ export function Nav() {
   }, [pathname])
 
   return (
-    <nav className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
+    <nav className="fixed top-4 left-0 right-0 z-50 flex justify-end md:justify-center px-4">
       {/* Desktop nav - centered pill shape */}
       <div className="hidden md:flex items-center gap-1 bg-white/90 backdrop-blur-sm border border-neutral-200 rounded-full px-2 py-2 shadow-sm">
         {navItems.map((item) => {

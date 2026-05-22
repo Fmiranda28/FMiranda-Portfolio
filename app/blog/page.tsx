@@ -68,6 +68,7 @@ const posts = [
 
 export default function BlogPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
     <main className="bg-white min-h-screen">
@@ -83,77 +84,110 @@ export default function BlogPage() {
           Back to Portfolio
         </Link>
       </div>
-      
-      {/* Header */}
-      <div className="relative pt-24 pb-16 px-6 overflow-hidden">
-        {/* Dot pattern background */}
-        <div 
-          className="absolute top-0 right-0 w-1/2 h-full opacity-60"
-          style={{
-            backgroundImage: "radial-gradient(circle, #c7d2e0 2.5px, transparent 2.5px)",
-            backgroundSize: "32px 32px",
-            maskImage: "linear-gradient(to left, black 0%, transparent 80%)",
-            WebkitMaskImage: "linear-gradient(to left, black 0%, transparent 80%)",
-          }}
-        />
-        
-        <div className="relative z-10 max-w-3xl mx-auto">
-          {/* Label */}
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-8 h-px bg-neutral-900" />
-            <span className="text-xs font-bold uppercase tracking-widest text-neutral-500">Journal</span>
+
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        className="!fixed !top-6 !right-6 !z-50 md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 bg-white/90 backdrop-blur-sm border border-neutral-200 rounded-lg hover:border-neutral-900 transition-colors"
+        aria-label="Toggle menu"
+      >
+        <span className="w-5 h-0.5 bg-neutral-900 rounded-full"></span>
+        <span className="w-5 h-0.5 bg-neutral-900 rounded-full"></span>
+        <span className="w-5 h-0.5 bg-neutral-900 rounded-full"></span>
+      </button>
+
+      <div className="flex min-h-screen">
+        {/* Mobile Menu Overlay */}
+        {mobileMenuOpen && (
+          <div
+            className="fixed inset-0 bg-black/20 z-30 md:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
+
+        {/* Left Sidebar - Fixed on Desktop, Modal on Mobile */}
+        <div className={`w-full md:w-1/3 md:fixed md:left-0 md:top-0 md:h-screen p-6 md:p-12 flex-col justify-between bg-white relative ${
+          mobileMenuOpen ? 'fixed inset-0 z-40 flex' : 'hidden md:flex'
+        }`} style={{ paddingTop: "90px" }}>
+          {/* Mobile Close Button */}
+          {mobileMenuOpen && (
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="absolute top-4 right-4 text-neutral-900"
+              aria-label="Close menu"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          )}
+          
+          {/* Top Section */}
+          <div>
+            <h3 className="text-5xl md:text-6xl font-bold text-neutral-900 mb-3 tracking-tight">
+              Stories
+            </h3>
+            <p className="text-lg text-neutral-500 leading-relaxed">
+              Since the day I started coding
+            </p>
           </div>
-          
-          {/* Title */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 mb-4 tracking-tight">
-            My Blog
-          </h1>
-          
-          {/* Subtitle with accent */}
-          <p className="text-lg md:text-xl text-neutral-600 max-w-lg leading-relaxed">
-            Where I share insights on <span className="text-neutral-900 font-medium">development</span>, <span className="text-neutral-900 font-medium">leadership</span>, and <span className="text-neutral-900 font-medium">technology</span>.
-          </p>
-        </div>
-      </div>
 
-      {/* Blog Posts - Full screen scroll */}
-      <div className="snap-y snap-mandatory">
-        {posts.map((post, index) => (
-          <article 
-            key={index} 
-            className="h-screen snap-start snap-always flex items-center border-b border-neutral-100"
-          >
-            <div className="w-full max-w-5xl mx-auto px-6 md:px-12">
-              {/* Title */}
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-6 leading-tight">
-                {post.title}
-              </h2>
-
-              {/* Image */}
-              <div 
-                className="relative aspect-[21/9] overflow-hidden rounded-xl bg-neutral-100 mb-6 cursor-pointer hover:opacity-90 transition-opacity"
-                onClick={() => setSelectedImage(post.image)}
-              >
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              
-              {/* Description */}
-              <p className="text-base md:text-lg text-neutral-600 leading-relaxed mb-6">
-                {post.description}
-              </p>
-
-              {/* Date */}
-              <span className="text-sm text-neutral-400 uppercase tracking-wide">
-                {post.date}
-              </span>
+          {/* Bottom Section */}
+          <div>
+            {/* Label */}
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-8 h-px bg-neutral-900" />
+              <span className="text-xs font-bold uppercase tracking-widest text-neutral-500">Journal</span>
             </div>
-          </article>
-        ))}
+            
+            {/* Title */}
+            <h1 className="text-5xl md:text-6xl font-bold text-neutral-900 mb-6 tracking-tight">
+              My Blog
+            </h1>
+            
+            {/* Subtitle with accent */}
+            <p className="text-base md:text-lg text-neutral-600 leading-relaxed">
+              Where I share my personal insights on <span className="text-neutral-900 font-medium">development</span>, <span className="text-neutral-900 font-medium">leadership</span>, and <span className="text-neutral-900 font-medium">technology</span>.
+            </p>
+          </div>
+        </div>
+
+        {/* Right Side - Blog Posts (scrollable) */}
+        <div className="w-full md:w-2/3 md:ml-auto p-6 md:p-12 overflow-y-auto">
+          <div className="space-y-12">
+            {posts.map((post, index) => (
+              <article key={index} className="border-b border-neutral-200 pb-12 md:pb-32 last:border-b-0 md:min-h-screen md:flex md:flex-col md:justify-center">
+                {/* Title */}
+                <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
+                  {post.title}
+                </h2>
+
+                {/* Image */}
+                <div 
+                  className="relative aspect-[16/9] overflow-hidden rounded-xl bg-neutral-100 mb-6 cursor-pointer hover:opacity-90 transition-opacity"
+                  onClick={() => setSelectedImage(post.image)}
+                >
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                
+                {/* Description */}
+                <p className="text-base md:text-lg text-neutral-600 leading-relaxed mb-4">
+                  {post.description}
+                </p>
+
+                {/* Date */}
+                <span className="text-sm md:text-base text-neutral-400 uppercase tracking-wide">
+                  {post.date}
+                </span>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Image Modal */}
