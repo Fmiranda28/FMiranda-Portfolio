@@ -26,7 +26,7 @@ export function About() {
             
             {/* First Text Block - Right Side */}
             <div className="md:col-span-2">
-              <h2 className="text-3xl md:text-4xl font-light text-neutral-900 leading-relaxed">
+              <h2 className="text-3xl md:text-4xl font-light text-neutral-900 leading-relaxed text-justify">
                 It started the way it always does — curiosity. A line of code, a page that responded, and suddenly the world felt like something you could shape. From that moment, I never stopped building.
               </h2>
             </div>
@@ -34,10 +34,10 @@ export function About() {
 
           {/* Bottom Section: Full Width Text */}
           <div>
-            <p className="text-neutral-500 leading-relaxed text-lg mb-6">
+            <p className="text-neutral-500 leading-relaxed text-lg mb-6 text-justify">
               Web platforms that scale, mobile apps that feel native, game systems that engage, hardware that bridges the physical and digital — I don't build in one lane. I thrive at the intersection of all of them.
             </p>
-            <p className="text-neutral-500 leading-relaxed text-lg">
+            <p className="text-neutral-500 leading-relaxed text-lg text-justify">
               But shipping great code was never the whole story. As my projects grew, so did my responsibilities. I started leading teams, distributing work, setting direction — making sure things actually landed on time, at a standard everyone could be proud of. The move from developer to team lead wasn't a pivot; it was a natural next step. Today, I build end-to-end — from the first architecture decision to the final user interaction. Every role I've taken on has added a new lens: engineer, leader, project manager, quality advocate. What drives me is simple — creating things that work beautifully and matter to the people using them.
             </p>
           </div>
