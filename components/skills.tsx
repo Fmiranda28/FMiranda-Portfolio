@@ -16,8 +16,12 @@ const skills = [
     items: ["Unity", "C#"],
   },
   {
+    category: "Devops",
+    items: ["Digital Ocean", "Docker"],
+  },
+  {
     category: "Tools & Management",
-    items: ["Git", "GitHub", "Docker", "Figma", "Jira", "Trello"],
+    items: ["Git", "GitHub", "Figma", "Jira", "Trello"],
   },
   {
     category: "AI Tools",
