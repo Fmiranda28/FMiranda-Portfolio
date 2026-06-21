@@ -41,11 +41,6 @@ function AnimatedDotGrid() {
     const maxSpeed = 2.0
     const steeringForce = 0.03
 
-    // Mouse state
-    let mouseX = -1000
-    let mouseY = -1000
-    let isMouseOver = false
-
     // Handle resize with device pixel ratio scaling for crisp rendering
     const handleResize = () => {
       const rect = canvas.getBoundingClientRect()
@@ -67,42 +62,15 @@ function AnimatedDotGrid() {
     handleResize()
     window.addEventListener("resize", handleResize)
 
-    // Track mouse coordinates on window so canvas can be pointer-events-none
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect()
-      if (
-        e.clientX >= rect.left &&
-        e.clientX <= rect.right &&
-        e.clientY >= rect.top &&
-        e.clientY <= rect.bottom
-      ) {
-        mouseX = e.clientX - rect.left
-        mouseY = e.clientY - rect.top
-        isMouseOver = true
-      } else {
-        isMouseOver = false
-      }
-    }
-
-    const handleMouseLeave = () => {
-      isMouseOver = false
-    }
-
-    window.addEventListener("mousemove", handleMouseMove)
-    document.addEventListener("mouseleave", handleMouseLeave)
-
     // Main animation loop
     const update = () => {
-      // 1. Update Ant position using steering behavior (wandering or mouse tracking)
-      const activeTargetX = isMouseOver ? mouseX : targetX
-      const activeTargetY = isMouseOver ? mouseY : targetY
-
-      const dx = activeTargetX - antX
-      const dy = activeTargetY - antY
+      // 1. Update Ant position using steering behavior (wandering only)
+      const dx = targetX - antX
+      const dy = targetY - antY
       const dist = Math.sqrt(dx * dx + dy * dy)
 
       // If reached target, choose another random target on the map
-      if (dist < 60 && !isMouseOver) {
+      if (dist < 60) {
         targetX = Math.random() * width
         targetY = Math.random() * height
       }
@@ -132,7 +100,7 @@ function AnimatedDotGrid() {
       ctx.clearRect(0, 0, width, height)
 
       const isDark = document.documentElement.classList.contains("dark")
-      const colorPrefix = isDark ? "75, 75, 75" : "212, 212, 212" // neutral-700 / neutral-300
+      const colorPrefix = isDark ? "115, 115, 115" : "163, 163, 163" // neutral-500 / neutral-400
 
       const startX = (width % spacing) / 2
       const startY = (height % spacing) / 2
@@ -172,8 +140,6 @@ function AnimatedDotGrid() {
     return () => {
       cancelAnimationFrame(animationFrameId)
       window.removeEventListener("resize", handleResize)
-      window.removeEventListener("mousemove", handleMouseMove)
-      document.removeEventListener("mouseleave", handleMouseLeave)
     }
   }, [])
 
