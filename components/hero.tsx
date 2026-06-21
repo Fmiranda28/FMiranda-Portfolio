@@ -13,6 +13,18 @@ const roles = [
   "Founder of FSudoLab.com",
 ]
 
+interface Wanderer {
+  x: number
+  y: number
+  vx: number
+  vy: number
+  targetX: number
+  targetY: number
+  maxSpeed: number
+  steeringForce: number
+  radius: number
+}
+
 function AnimatedDotGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -28,18 +40,13 @@ function AnimatedDotGrid() {
     let height = 0
 
     // Spacing between dots
-    const spacing = 45
+    const spacing = 24
 
-    // "Ant" physics state (the center of the wandering circular chunk)
-    let antX = 0
-    let antY = 0
-    let vx = 0
-    let vy = 0
-    let targetX = 0
-    let targetY = 0
-
-    const maxSpeed = 4.5
-    const steeringForce = 0.08
+    // Two independent wandering spotlight chunks, each with its own velocity and target (steering brain)
+    const wanderers: Wanderer[] = [
+      { x: 0, y: 0, vx: 0, vy: 0, targetX: 0, targetY: 0, maxSpeed: 3.5, steeringForce: 0.05, radius: 280 },
+      { x: 0, y: 0, vx: 0, vy: 0, targetX: 0, targetY: 0, maxSpeed: 4.2, steeringForce: 0.08, radius: 220 }
+    ]
 
     // Handle resize with device pixel ratio scaling for crisp rendering
     const handleResize = () => {
@@ -50,13 +57,15 @@ function AnimatedDotGrid() {
       canvas.height = height * window.devicePixelRatio
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
 
-      // Initialize ant and target inside boundaries if not set
-      if (antX === 0 && antY === 0) {
-        antX = width / 2
-        antY = height / 2
-        targetX = Math.random() * width
-        targetY = Math.random() * height
-      }
+      // Initialize positions and targets inside boundaries
+      wanderers.forEach((w) => {
+        if (w.x === 0 && w.y === 0) {
+          w.x = Math.random() * width
+          w.y = Math.random() * height
+          w.targetX = Math.random() * width
+          w.targetY = Math.random() * height
+        }
+      })
     }
 
     handleResize()
@@ -64,37 +73,39 @@ function AnimatedDotGrid() {
 
     // Main animation loop
     const update = () => {
-      // 1. Update Ant position using steering behavior (wandering only)
-      const dx = targetX - antX
-      const dy = targetY - antY
-      const dist = Math.sqrt(dx * dx + dy * dy)
+      // 1. Update all wanderers using steering behavior (individual paths/brains)
+      wanderers.forEach((w) => {
+        const dx = w.targetX - w.x
+        const dy = w.targetY - w.y
+        const dist = Math.sqrt(dx * dx + dy * dy)
 
-      // If reached target, choose another random target on the map
-      if (dist < 60) {
-        targetX = Math.random() * width
-        targetY = Math.random() * height
-      }
+        // Choose a new random target on the map if close
+        if (dist < 60) {
+          w.targetX = Math.random() * width
+          w.targetY = Math.random() * height
+        }
 
-      if (dist > 1) {
-        const desiredVx = (dx / dist) * maxSpeed
-        const desiredVy = (dy / dist) * maxSpeed
+        if (dist > 1) {
+          const desiredVx = (dx / dist) * w.maxSpeed
+          const desiredVy = (dy / dist) * w.maxSpeed
 
-        const steerX = desiredVx - vx
-        const steerY = desiredVy - vy
+          const steerX = desiredVx - w.vx
+          const steerY = desiredVy - w.vy
 
-        vx += steerX * steeringForce
-        vy += steerY * steeringForce
+          w.vx += steerX * w.steeringForce
+          w.vy += steerY * w.steeringForce
 
-        antX += vx
-        antY += vy
-      }
+          w.x += w.vx
+          w.y += w.vy
+        }
 
-      // Bound checking with margins
-      const margin = 40
-      if (antX < margin) { antX = margin; vx *= -0.5; targetX = Math.random() * width }
-      if (antX > width - margin) { antX = width - margin; vx *= -0.5; targetX = Math.random() * width }
-      if (antY < margin) { antY = margin; vy *= -0.5; targetY = Math.random() * height }
-      if (antY > height - margin) { antY = height - margin; vy *= -0.5; targetY = Math.random() * height }
+        // Bound checking with soft wall bounces
+        const margin = 40
+        if (w.x < margin) { w.x = margin; w.vx *= -0.5; w.targetX = Math.random() * width }
+        if (w.x > width - margin) { w.x = width - margin; w.vx *= -0.5; w.targetX = Math.random() * width }
+        if (w.y < margin) { w.y = margin; w.vy *= -0.5; w.targetY = Math.random() * height }
+        if (w.y > height - margin) { w.y = height - margin; w.vy *= -0.5; w.targetY = Math.random() * height }
+      })
 
       // 2. Clear Canvas
       ctx.clearRect(0, 0, width, height)
@@ -107,23 +118,25 @@ function AnimatedDotGrid() {
 
       for (let x = startX; x < width; x += spacing) {
         for (let y = startY; y < height; y += spacing) {
-          // Calculate distance from dot to the wandering ant center
-          const dX = x - antX
-          const dY = y - antY
-          const dotDist = Math.sqrt(dX * dX + dY * dY)
+          let combinedIntensity = 0
 
-          // 1 chunk circular spotlight radius (no breathing, no ripples)
-          const effectRadius = 320
-          let intensity = 0
+          // Calculate combined intensity from both spotlights
+          for (const w of wanderers) {
+            const dX = x - w.x
+            const dY = y - w.y
+            const dotDist = Math.sqrt(dX * dX + dY * dY)
 
-          if (dotDist < effectRadius) {
-            // Cosine curve creates a smooth fade out from the center of the circle
-            intensity = Math.cos((dotDist / effectRadius) * (Math.PI / 2))
+            if (dotDist < w.radius) {
+              const intensity = Math.cos((dotDist / w.radius) * (Math.PI / 2))
+              if (intensity > combinedIntensity) {
+                combinedIntensity = intensity
+              }
+            }
           }
 
-          // Apply opacity and radius scaling based on the intensity
-          const opacity = 0.12 + intensity * 0.55
-          const radius = 1.5 + intensity * 1.8
+          // Apply opacity and radius scaling based on the combined intensity
+          const opacity = 0.12 + combinedIntensity * 0.55
+          const radius = 1.0 + combinedIntensity * 1.2
 
           ctx.beginPath()
           ctx.arc(x, y, radius, 0, Math.PI * 2)
