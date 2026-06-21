@@ -113,8 +113,9 @@ export function Hero() {
               FSudoLab
             </a>
             <a
-              href="/resume.pdf"
+              href="/my-cv/Fernando_Miranda_Resume.pdf"
               className="text-sm text-neutral-400 hover:text-neutral-900 transition-colors"
+              download
             >
               Download Resume
             </a>
