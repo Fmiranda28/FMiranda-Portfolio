@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 
 const roles = [
@@ -12,6 +12,182 @@ const roles = [
   "IoT Engineer",
   "Founder of FSudoLab.com",
 ]
+
+function AnimatedDotGrid() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    let animationFrameId: number
+    let width = 0
+    let height = 0
+
+    // Spacing between dots
+    const spacing = 45
+
+    // "Ant" physics state (the center of the wandering circular chunk)
+    let antX = 0
+    let antY = 0
+    let vx = 0
+    let vy = 0
+    let targetX = 0
+    let targetY = 0
+
+    const maxSpeed = 2.0
+    const steeringForce = 0.03
+
+    // Mouse state
+    let mouseX = -1000
+    let mouseY = -1000
+    let isMouseOver = false
+
+    // Handle resize with device pixel ratio scaling for crisp rendering
+    const handleResize = () => {
+      const rect = canvas.getBoundingClientRect()
+      width = rect.width
+      height = rect.height
+      canvas.width = width * window.devicePixelRatio
+      canvas.height = height * window.devicePixelRatio
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+
+      // Initialize ant and target inside boundaries if not set
+      if (antX === 0 && antY === 0) {
+        antX = width / 2
+        antY = height / 2
+        targetX = Math.random() * width
+        targetY = Math.random() * height
+      }
+    }
+
+    handleResize()
+    window.addEventListener("resize", handleResize)
+
+    // Track mouse coordinates on window so canvas can be pointer-events-none
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect()
+      if (
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom
+      ) {
+        mouseX = e.clientX - rect.left
+        mouseY = e.clientY - rect.top
+        isMouseOver = true
+      } else {
+        isMouseOver = false
+      }
+    }
+
+    const handleMouseLeave = () => {
+      isMouseOver = false
+    }
+
+    window.addEventListener("mousemove", handleMouseMove)
+    document.addEventListener("mouseleave", handleMouseLeave)
+
+    // Main animation loop
+    const update = () => {
+      // 1. Update Ant position using steering behavior (wandering or mouse tracking)
+      const activeTargetX = isMouseOver ? mouseX : targetX
+      const activeTargetY = isMouseOver ? mouseY : targetY
+
+      const dx = activeTargetX - antX
+      const dy = activeTargetY - antY
+      const dist = Math.sqrt(dx * dx + dy * dy)
+
+      // If reached target, choose another random target on the map
+      if (dist < 60 && !isMouseOver) {
+        targetX = Math.random() * width
+        targetY = Math.random() * height
+      }
+
+      if (dist > 1) {
+        const desiredVx = (dx / dist) * maxSpeed
+        const desiredVy = (dy / dist) * maxSpeed
+
+        const steerX = desiredVx - vx
+        const steerY = desiredVy - vy
+
+        vx += steerX * steeringForce
+        vy += steerY * steeringForce
+
+        antX += vx
+        antY += vy
+      }
+
+      // Bound checking with margins
+      const margin = 40
+      if (antX < margin) { antX = margin; vx *= -0.5; targetX = Math.random() * width }
+      if (antX > width - margin) { antX = width - margin; vx *= -0.5; targetX = Math.random() * width }
+      if (antY < margin) { antY = margin; vy *= -0.5; targetY = Math.random() * height }
+      if (antY > height - margin) { antY = height - margin; vy *= -0.5; targetY = Math.random() * height }
+
+      // 2. Clear Canvas
+      ctx.clearRect(0, 0, width, height)
+
+      const isDark = document.documentElement.classList.contains("dark")
+      const colorPrefix = isDark ? "75, 75, 75" : "212, 212, 212" // neutral-700 / neutral-300
+
+      const startX = (width % spacing) / 2
+      const startY = (height % spacing) / 2
+
+      for (let x = startX; x < width; x += spacing) {
+        for (let y = startY; y < height; y += spacing) {
+          // Calculate distance from dot to the wandering ant center
+          const dX = x - antX
+          const dY = y - antY
+          const dotDist = Math.sqrt(dX * dX + dY * dY)
+
+          // 1 chunk circular spotlight radius (no breathing, no ripples)
+          const effectRadius = 320
+          let intensity = 0
+
+          if (dotDist < effectRadius) {
+            // Cosine curve creates a smooth fade out from the center of the circle
+            intensity = Math.cos((dotDist / effectRadius) * (Math.PI / 2))
+          }
+
+          // Apply opacity and radius scaling based on the intensity
+          const opacity = 0.12 + intensity * 0.55
+          const radius = 1.5 + intensity * 1.8
+
+          ctx.beginPath()
+          ctx.arc(x, y, radius, 0, Math.PI * 2)
+          ctx.fillStyle = `rgba(${colorPrefix}, ${opacity})`
+          ctx.fill()
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(update)
+    }
+
+    update()
+
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      window.removeEventListener("resize", handleResize)
+      window.removeEventListener("mousemove", handleMouseMove)
+      document.removeEventListener("mouseleave", handleMouseLeave)
+    }
+  }, [])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full pointer-events-none z-0"
+      style={{
+        maskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0) 95%)',
+        WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0) 95%)',
+      }}
+    />
+  )
+}
 
 export function Hero() {
   const [currentRole, setCurrentRole] = useState(0)
@@ -47,35 +223,7 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-white">
-      {/* Dot pattern - Top Right (manually coded triangle) */}
-      <div className="absolute top-4 right-4 flex flex-col-reverse items-end">
-        {Array.from({ length: 18 }).map((_, rowIndex) => (
-          <div key={rowIndex} className="flex gap-[12px]" style={{ marginBottom: '12px' }}>
-            {Array.from({ length: rowIndex + 1 }).map((_, dotIndex) => (
-              <div
-                key={dotIndex}
-                className="w-[4px] h-[4px] rounded-full bg-neutral-300"
-                style={{ opacity: 1 - (rowIndex * 0.045) }}
-              />
-            ))}
-          </div>
-        ))}
-      </div>
-
-      {/* Dot pattern - Bottom Left (manually coded triangle) */}
-      <div className="absolute bottom-6 left-4 flex flex-col items-start">
-        {Array.from({ length: 18 }).map((_, rowIndex) => (
-          <div key={rowIndex} className="flex gap-[12px]" style={{ marginBottom: '12px' }}>
-            {Array.from({ length: rowIndex + 1 }).map((_, dotIndex) => (
-              <div
-                key={dotIndex}
-                className="w-[4px] h-[4px] rounded-full bg-neutral-300"
-                style={{ opacity: 1 - (rowIndex * 0.045) }}
-              />
-            ))}
-          </div>
-        ))}
-      </div>
+      <AnimatedDotGrid />
 
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20 px-6 max-w-5xl mx-auto">
         {/* Profile Image */}
