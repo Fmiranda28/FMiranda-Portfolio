@@ -113,7 +113,7 @@ export function Hero() {
               FSudoLab
             </a>
             <a
-              href="/my-cv/Fernando_Miranda_Resume.pdf"
+              href="/my-cv/FMiranda-resume.pdf"
               className="text-sm text-neutral-400 hover:text-neutral-900 transition-colors"
               download
             >
