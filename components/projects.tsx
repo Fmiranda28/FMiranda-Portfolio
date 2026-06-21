@@ -93,7 +93,7 @@ const projects = [
     title: "Flappy Bird Clone",
     description:
       "A recreation of the classic Flappy Bird game featuring simple controls, obstacle mechanics, and retro-inspired gameplay.",
-    images: ["/projects-images/BIRD-GAME/flappy-bird.png"],
+    images: ["/projects-images/BIRD-GAME/Flappy-Bird.png"],
     tags: ["Unity", "C#", "2D Game", "Game Development"],
   },
   {
