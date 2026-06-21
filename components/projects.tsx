@@ -70,10 +70,10 @@ const projects = [
     description:
       "A travel and exploration application designed to help users discover destinations, plan trips, and enhance their travel experiences.",
     images: [
-      "/projects-images/Wander-1.png",
-      "/projects-images/Wander-2.png",
-      "/projects-images/Wander-3.png",
-      "/projects-images/Wander-4.png",
+      "/projects-images/wander-1.png",
+      "/projects-images/wander-2.png",
+      "/projects-images/wander-3.png",
+      "/projects-images/wander-4.png",
     ],
     tags: ["Next.js", "Travel App", "UI/UX", "Web App"],
   },
