@@ -5,6 +5,14 @@ const experience = [
     period: "May 2026 – Present",
     description: ["Developing games using Unity and C#."],
   },
+ {
+    role: "AI Trainer Specialist",
+    company: "Outlier",
+    period: "Feb 2026 – Present",
+    description: ["– Evaluated AI-generated responses for accuracy, quality, and relevance against defined guidelines.",
+                  "– Reviewed and refined model outputs to improve consistency, correctness, and overall response quality.",
+                  "– Provided structured feedback to support ongoing model training and performance improvements."],
+  },
   {
     role: "Web App Developer",
     company: "CountPro",
