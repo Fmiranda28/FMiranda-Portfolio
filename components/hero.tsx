@@ -38,8 +38,8 @@ function AnimatedDotGrid() {
     let targetX = 0
     let targetY = 0
 
-    const maxSpeed = 2.0
-    const steeringForce = 0.03
+    const maxSpeed = 4.5
+    const steeringForce = 0.08
 
     // Handle resize with device pixel ratio scaling for crisp rendering
     const handleResize = () => {
