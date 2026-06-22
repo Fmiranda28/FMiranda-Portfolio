@@ -31,24 +31,25 @@ const experience = [
     ],
   },
   {
-    role: "Full Stack Developer",
+    role: "Full Stack Web/Mobile App Developer",
     company: "Freelancer",
     period: "2024 – 2025",
     description: [
-      "Built and maintained web applications.",
+      "Built and maintained web/mobile applications.",
       "Built websites using HTML, CSS, PHP, and JavaScript.",
+      "Developed mobile apps using Flutter and Dart.",
     ],
   },
   {
-    role: "Web and App Developer",
-    company: "Freelancer",
-    period: "2024 – 2025",
+    role: "Founder",
+    company: "FSudoLab",
+    period: "2024 – Present",
     description: [
-      "Developed responsive web applications using React and Flutter.",
-      "Collaborated with clients to deliver custom solutions.",
-      "Implemented modern UI/UX designs and best practices.",
+      "Founded and led a startup focused on developing custom web and mobile solutions for businesses and organizations.",
+      "Led a team of developers in designing, building, and maintaining websites and applications while coordinating project requirements and development efforts.",
+      "Worked directly with clients to understand business needs and deliver solutions using HTML, CSS, JavaScript, PHP, Flutter, and Dart.",
     ],
-  },
+  }
 ]
 
 export function Experience() {
