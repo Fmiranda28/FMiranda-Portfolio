@@ -237,7 +237,7 @@ export function Hero() {
               rel="noopener noreferrer"
               className="text-sm text-neutral-900 hover:text-neutral-500 transition-colors"
             >
-              FSudoLab
+              FSudoLab.com
             </a>
             <a
               href="/my-cv/FMiranda-resume.pdf"
