@@ -1,17 +1,17 @@
 const experience = [
+   {
+    role: "AI Trainer Specialist (Part-Time)",
+    company: "Outlier",
+    period: "2026 – Present",
+    description: ["– Evaluated AI-generated responses for accuracy, quality, and relevance against defined guidelines.",
+                  "– Reviewed and refined model outputs to improve consistency, correctness, and overall response quality.",
+                  "– Provided structured feedback to support ongoing model training and performance improvements."],
+  },
   {
     role: "Game Dev/Specialist",
     company: "CountPro",
     period: "May 2026 – Present",
     description: ["Developing games using Unity and C#."],
-  },
- {
-    role: "AI Trainer Specialist",
-    company: "Outlier",
-    period: "Feb 2026 – Present",
-    description: ["– Evaluated AI-generated responses for accuracy, quality, and relevance against defined guidelines.",
-                  "– Reviewed and refined model outputs to improve consistency, correctness, and overall response quality.",
-                  "– Provided structured feedback to support ongoing model training and performance improvements."],
   },
   {
     role: "Web App Developer",
@@ -63,12 +63,20 @@ export function Experience() {
         <div className="relative pl-[26px]">
           <div className="absolute left-2 top-2 bottom-2 w-px bg-neutral-200" />
 
-          {experience.map((item, i) => (
-            <div key={i} className="relative mb-10">
-              <div className="absolute -left-[26px] top-0.5 w-[17px] h-[17px] rounded-full border border-neutral-300 bg-white z-10" />
+          {experience.map((item, i) => {
+            const isPresent = item.period.toLowerCase().includes("present");
+            return (
+              <div key={i} className="relative mb-10">
+                <div
+                  className={`absolute -left-[26px] top-0.5 w-[17px] h-[17px] rounded-full border z-10 ${
+                    isPresent
+                      ? "border-black bg-black"
+                      : "border-neutral-300 bg-white"
+                  }`}
+                />
 
-              <div className="flex justify-between items-baseline gap-4 flex-wrap mb-1">
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-900">
+                <div className="flex justify-between items-baseline gap-4 flex-wrap mb-1">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-900">
                   {item.role}
                 </h3>
                 <span className="text-xs text-neutral-400 tracking-wide whitespace-nowrap">
@@ -88,7 +96,8 @@ export function Experience() {
                 ))}
               </ul>
             </div>
-          ))}
+          );
+          })}
         </div>
       </div>
     </section>
