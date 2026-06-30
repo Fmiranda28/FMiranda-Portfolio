@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
+import DottedGlobe from "@/components/globe/earth"
 
 const posts = [
 
@@ -90,21 +91,11 @@ export default function BlogPage() {
 
       <div className="flex min-h-screen">
         {/* Left Sidebar - Fixed on Desktop, Hidden on Mobile */}
-        <div className={`hidden md:flex md:w-1/3 md:fixed md:left-0 md:top-0 md:h-screen p-6 md:p-12 flex-col justify-between bg-white`} style={{ paddingTop: "90px" }}>
+        <div className={`hidden md:flex md:w-1/3 md:fixed md:left-0 md:top-0 md:h-screen p-6 md:p-12 flex-col justify-between bg-white overflow-hidden`} style={{ paddingTop: "90px" }}>
           {/* Top Section */}
           <div className="hidden md:block">
-            <h3 className="text-5xl md:text-6xl font-bold text-neutral-900 mb-3 tracking-tight">
-              Stories
-            </h3>
-            <p className="text-lg text-neutral-500 leading-relaxed">
-              Since the day I started coding
-            </p>
-          </div>
-
-          {/* Bottom Section */}
-          <div className="hidden md:block">
             {/* Label */}
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-px bg-neutral-900" />
               <span className="text-xs font-bold uppercase tracking-widest text-neutral-500">Journal</span>
             </div>
@@ -118,6 +109,15 @@ export default function BlogPage() {
             <p className="text-base md:text-lg text-neutral-600 leading-relaxed">
               Where I share my personal insights on <span className="text-neutral-900 font-medium">development</span>, <span className="text-neutral-900 font-medium">leadership</span>, and <span className="text-neutral-900 font-medium">technology</span>.
             </p>
+          </div>
+
+          {/* Bottom Section - Dotted Globe (only right half visible, pinned to absolute bottom) */}
+          <div className="hidden md:block absolute -bottom-28 left-0 -translate-x-[35%] w-[640px] h-[640px] select-none pointer-events-none">
+            <DottedGlobe
+              size={640}
+              background="transparent"
+              dotColor={[115, 115, 115]}
+            />
           </div>
         </div>
 
