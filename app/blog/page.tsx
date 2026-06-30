@@ -122,35 +122,35 @@ export default function BlogPage() {
         </div>
 
         {/* Right Side - Blog Posts (scrollable) */}
-        <div className="w-full md:w-2/3 md:ml-auto p-6 md:p-12 overflow-y-auto md:h-screen md:pt-0">
-          <div className="space-y-12">
+        <div className="w-full md:w-2/3 md:ml-auto p-6 md:p-12 md:px-20 overflow-y-auto md:h-screen md:pt-10">
+          <div className="space-y-12 max-w-[620px] mx-auto md:mx-0">
             {posts.map((post, index) => (
-              <article key={index} className="border-b border-neutral-200 pb-12 md:pb-32 last:border-b-0 md:min-h-screen md:flex md:flex-col md:justify-center">
+              <article key={index} className="border-b border-neutral-200 pt-0 pb-10 md:pb-14 last:border-b-0">
                 {/* Title */}
-                <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
+                <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 mb-6 leading-tight">
                   {post.title}
                 </h2>
 
                 {/* Image */}
                 <div 
-                  className="relative aspect-[16/9] overflow-hidden rounded-xl bg-neutral-100 mb-6 cursor-pointer hover:opacity-90 transition-opacity"
+                  className="relative aspect-[3/2] overflow-hidden rounded-xl bg-neutral-100 mb-6 cursor-pointer hover:opacity-90 transition-opacity"
                   onClick={() => setSelectedImage(post.image)}
                 >
                   <Image
                     src={post.image}
                     alt={post.title}
                     fill
-                    className="object-cover"
+                    className="object-fill"
                   />
                 </div>
                 
                 {/* Description */}
-                <p className="text-base md:text-lg text-neutral-600 leading-relaxed mb-4">
+                <p className="text-sm md:text-base text-neutral-600 leading-relaxed mb-4">
                   {post.description}
                 </p>
 
                 {/* Date */}
-                <span className="text-sm md:text-base text-neutral-400 uppercase tracking-wide">
+                <span className="text-xs md:text-sm text-neutral-400 uppercase tracking-wide">
                   {post.date}
                 </span>
               </article>
