@@ -22,7 +22,7 @@ interface DottedGlobeProps {
 
 export default function DottedGlobe({
     size,
-    rotationSpeed = 0.0022,
+    rotationSpeed = 0.0182,
     pitch = 0.05,
     dotColor = [150, 150, 150],
     background = '#ffffff',
