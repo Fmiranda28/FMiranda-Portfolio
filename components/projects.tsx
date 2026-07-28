@@ -169,272 +169,118 @@ export function Projects() {
     return () => window.removeEventListener("keydown", onKey)
   }, [nextImage, prevImage])
 
-  useEffect(() => {
-    const link = document.createElement("link")
-    link.rel = "stylesheet"
-    link.href =
-      "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap"
-    document.head.appendChild(link)
-    return () => { document.head.removeChild(link) }
-  }, [])
-
   return (
-    <section
-      id="projects"
-      style={{
-        background: "#ffffff",
-        padding: "6rem 1.25rem",
-        fontFamily: "'DM Sans', sans-serif",
-      }}
-    >
-      <style>{`
-        .pj-title { font-family: 'Cormorant Garamond', Georgia, serif; }
-
-        .pj-card {
-          transition: opacity .26s ease, transform .26s ease;
-          /* Fixed card size — same for every project */
-          display: flex;
-          flex-direction: column;
-          border-radius: 16px;
-          overflow: hidden;
-          border: 1px solid #e5e5e5;
-          background: #fff;
-          box-shadow: 0 2px 24px rgba(0,0,0,.06), 0 1px 4px rgba(0,0,0,.04);
-        }
-        .pj-card.out { opacity: 0; transform: translateY(8px); }
-
-        /* Row layout */
-        .pj-row {
-          display: flex;
-          flex-direction: column;
-        }
-        @media (min-width: 768px) {
-          .pj-row { flex-direction: row; }
-          /* Both panels share the fixed card height — no stretching */
-          .pj-img-panel {
-            flex: 0 0 56%;
-            aspect-ratio: unset !important;
-            height: 480px;
-          }
-          .pj-info-panel {
-            flex: 1 1 0;
-            height: 480px;
-          }
-        }
-
-        /* Image panel */
-        .pj-img-panel {
-          position: relative;
-          flex-shrink: 0;
-          overflow: hidden;
-          background: #f4f4f5;
-          aspect-ratio: 16/9;
-          min-height: 220px;
-        }
-
-        /* Info panel */
-        .pj-info-panel {
-          background: #ffffff;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          padding: clamp(1.75rem, 4vw, 2.75rem);
-          border-left: 1px solid #e5e5e5;
-          overflow: hidden;
-        }
-
-        /* Image nav buttons */
-        .pj-img-btn {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          z-index: 10;
-          width: 34px; height: 34px;
-          border-radius: 50%;
-          border: 1px solid rgba(0,0,0,.12);
-          background: rgba(255,255,255,.82);
-          color: #111;
-          display: flex; align-items: center; justify-content: center;
-          cursor: pointer;
-          font-size: 13px;
-          backdrop-filter: blur(6px);
-          transition: background .18s, border-color .18s, box-shadow .18s;
-          box-shadow: 0 1px 6px rgba(0,0,0,.1);
-        }
-        .pj-img-btn:hover {
-          background: #fff;
-          border-color: rgba(0,0,0,.28);
-          box-shadow: 0 2px 10px rgba(0,0,0,.15);
-        }
-
-        /* Tags */
-        .pj-tag {
-          font-size: .68rem;
-          color: #555;
-          padding: 5px 13px;
-          border: 1px solid #d4d4d8;
-          border-radius: 999px;
-          cursor: default;
-          letter-spacing: .04em;
-          white-space: nowrap;
-          transition: border-color .18s, color .18s, background .18s;
-        }
-        .pj-tag:hover { border-color: #18181b; color: #18181b; background: #fafafa; }
-
-        /* Nav buttons */
-        .pj-nav-btn {
-          display: flex; align-items: center; gap: 9px;
-          padding: 9px 20px 9px 14px;
-          border-radius: 999px;
-          border: 1px solid #d4d4d8;
-          background: transparent;
-          color: #71717a;
-          cursor: pointer;
-          font-size: .8rem;
-          letter-spacing: .04em;
-          transition: border-color .18s, color .18s, background .18s;
-          font-family: 'DM Sans', sans-serif;
-        }
-        .pj-nav-btn.right { padding: 9px 14px 9px 20px; }
-        .pj-nav-btn:hover { border-color: #18181b; color: #18181b; background: #fafafa; }
-
-        /* Progress dots */
-        .pj-dot {
-          height: 3px; border-radius: 2px;
-          border: none; cursor: pointer; padding: 0;
-          transition: width .28s ease, background .28s ease;
-        }
-
-        /* Divider line */
-        .pj-divider {
-          width: 28px; height: 1px; background: #d4d4d8; margin-bottom: 1.25rem;
-        }
-      `}</style>
-
-      <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-
-        {/* ── Section header ── */}
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: "3rem" }}>
-          <h2
-            className="pj-title"
-            style={{
-              color: "#18181b",
-              fontWeight: 300,
-              lineHeight: 1,
-              fontSize: "clamp(3rem, 8vw, 6rem)",
-              margin: 0,
-            }}
-          >
+    <section id="projects" className="py-32 px-6 bg-white">
+      <div className="max-w-5xl mx-auto">
+        {/* Section Header */}
+        <div className="flex justify-between items-center mb-12">
+          <p className="text-xs text-neutral-400 uppercase tracking-widest">
             Projects
-          </h2>
-          <span style={{ color: "#a1a1aa", fontSize: ".68rem", letterSpacing: ".2em", textTransform: "uppercase", marginBottom: "4px" }}>
+          </p>
+          <span className="text-xs text-neutral-400 tracking-wider">
             {pad(currentIndex + 1)}&nbsp;/&nbsp;{pad(projects.length)}
           </span>
         </div>
 
-        {/* ── Card — fixed dimensions, same every project ── */}
-        <div className={`pj-card${fading ? " out" : ""}`}>
-          <div className="pj-row">
+        {/* Project Card */}
+        <div
+          className={`w-full flex flex-col md:flex-row border border-neutral-100 rounded-2xl overflow-hidden bg-white shadow-xs transition-all duration-[260ms] ease-in-out ${
+            fading ? "opacity-0 translate-y-2" : "opacity-100 translate-y-0"
+          }`}
+        >
+          {/* Image Panel */}
+          <div className="relative w-full md:w-[56%] aspect-video md:aspect-auto h-[240px] md:h-[480px] bg-neutral-50 overflow-hidden shrink-0">
+            <Image
+              src={project.images[currentImageIndex]}
+              alt={`${project.title} — ${pad(currentImageIndex + 1)}`}
+              fill
+              className="object-cover cursor-zoom-in"
+              onClick={() => setLightboxOpen(true)}
+            />
 
-            {/* Image panel */}
-            <div className="pj-img-panel">
-              <Image
-                src={project.images[currentImageIndex]}
-                alt={`${project.title} — ${pad(currentImageIndex + 1)}`}
-                fill
-                style={{ objectFit: "cover", cursor: "zoom-in" }}
-                onClick={() => setLightboxOpen(true)}
-              />
+            {project.images.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    prevImage()
+                  }}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full border border-neutral-200/50 bg-white/80 hover:bg-white text-neutral-800 flex items-center justify-center cursor-pointer shadow-xs backdrop-blur-xs transition-all hover:scale-105 active:scale-95"
+                  aria-label="Previous image"
+                >
+                  ←
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    nextImage()
+                  }}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full border border-neutral-200/50 bg-white/80 hover:bg-white text-neutral-800 flex items-center justify-center cursor-pointer shadow-xs backdrop-blur-xs transition-all hover:scale-105 active:scale-95"
+                  aria-label="Next image"
+                >
+                  →
+                </button>
 
-              {project.images.length > 1 && (
-                <>
-                  <button className="pj-img-btn" style={{ left: "12px" }} onClick={prevImage} aria-label="Previous image">←</button>
-                  <button className="pj-img-btn" style={{ right: "12px" }} onClick={nextImage} aria-label="Next image">→</button>
-
-                  {/* Image dot strip */}
-                  <div style={{ position: "absolute", bottom: "12px", left: "50%", transform: "translateX(-50%)", display: "flex", gap: "5px", zIndex: 10 }}>
-                    {project.images.map((_, i) => (
-                      <button
-                        key={i}
-                        className="pj-dot"
-                        aria-label={`Image ${i + 1}`}
-                        onClick={() => setCurrentImageIndex(i)}
-                        style={{
-                          width: i === currentImageIndex ? "20px" : "6px",
-                          background: i === currentImageIndex ? "#18181b" : "rgba(0,0,0,.22)",
-                        }}
-                      />
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-
-            {/* Info panel */}
-            <div className="pj-info-panel">
-              <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-
-                {/* Top: category + title + description */}
-                <div style={{ flex: 1, minHeight: 0 }}>
-                  <p style={{
-                    color: "#a1a1aa",
-                    fontSize: ".62rem",
-                    letterSpacing: ".22em",
-                    textTransform: "uppercase",
-                    marginBottom: "1rem",
-                    margin: "0 0 1rem 0",
-                  }}>
-                    {project.tags[0]}
-                  </p>
-
-                  <h3
-                    className="pj-title"
-                    style={{
-                      /* Fixed font size — same visual weight every project */
-                      fontSize: "clamp(1.6rem, 2.8vw, 2.6rem)",
-                      fontWeight: 300,
-                      color: "#18181b",
-                      lineHeight: 1.08,
-                      margin: "0 0 1.25rem 0",
-                    }}
-                  >
-                    {project.title}
-                  </h3>
-
-                  <div className="pj-divider" />
-
-                  <p style={{
-                    color: "#71717a",
-                    fontSize: ".88rem",
-                    lineHeight: 1.8,
-                    margin: 0,
-                    /* Clamp to fixed number of lines so all cards look equal */
-                    display: "-webkit-box",
-                    WebkitLineClamp: 4,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                  }}>
-                    {project.description}
-                  </p>
-                </div>
-
-                {/* Bottom: tags */}
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "7px", paddingTop: "1.5rem" }}>
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="pj-tag">{tag}</span>
+                {/* Image Dots */}
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                  {project.images.map((_, i) => (
+                    <button
+                      key={i}
+                      className={`h-1 rounded-full transition-all duration-300 ${
+                        i === currentImageIndex ? "w-5 bg-neutral-900" : "w-1.5 bg-black/20"
+                      }`}
+                      aria-label={`Image ${i + 1}`}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setCurrentImageIndex(i)
+                      }}
+                    />
                   ))}
                 </div>
-              </div>
+              </>
+            )}
+          </div>
+
+          {/* Info Panel */}
+          <div className="flex-1 flex flex-col justify-between p-8 md:p-12 bg-white md:h-[480px]">
+            <div className="flex-1 flex flex-col min-h-0">
+              {/* Category / Primary Tag */}
+              <p className="text-[10px] text-neutral-400 font-medium tracking-widest uppercase mb-3">
+                {project.tags[0]}
+              </p>
+
+              {/* Title */}
+              <h3 className="text-2xl md:text-3xl font-light text-neutral-900 leading-tight mb-4">
+                {project.title}
+              </h3>
+
+              {/* Divider Line */}
+              <div className="w-8 h-px bg-neutral-200 mb-5" />
+
+              {/* Description */}
+              <p className="text-neutral-500 leading-relaxed text-sm md:text-base line-clamp-4">
+                {project.description}
+              </p>
             </div>
 
+            {/* Bottom Tags */}
+            <div className="flex flex-wrap gap-1.5 pt-6 mt-auto">
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs text-neutral-500 px-3 py-1 bg-neutral-50 border border-neutral-100 rounded-full hover:border-neutral-900 hover:text-neutral-900 hover:bg-neutral-100 transition-colors cursor-default"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* ── Project navigation ── */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "1.5rem" }}>
-
+        {/* Project Navigation */}
+        <div className="flex items-center justify-between mt-8">
           <button
-            className="pj-nav-btn"
+            className="flex items-center gap-2 px-5 py-2 border border-neutral-200 rounded-full text-neutral-500 hover:text-neutral-900 hover:border-neutral-900 bg-white hover:bg-neutral-50 transition-colors text-sm"
             onClick={() => changeProject((currentIndex - 1 + projects.length) % projects.length)}
             aria-label="Previous project"
           >
@@ -442,73 +288,78 @@ export function Projects() {
             <span>Previous</span>
           </button>
 
-          {/* Dot strip */}
-          <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
+          {/* Project Dots */}
+          <div className="flex gap-1.5 items-center">
             {projects.map((_, i) => (
               <button
                 key={i}
-                className="pj-dot"
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === currentIndex ? "w-6 bg-neutral-900" : "w-1.5 bg-neutral-200"
+                }`}
                 aria-label={`Project ${i + 1}`}
                 onClick={() => changeProject(i)}
-                style={{
-                  width: i === currentIndex ? "22px" : "6px",
-                  background: i === currentIndex ? "#18181b" : "#d4d4d8",
-                }}
               />
             ))}
           </div>
 
           <button
-            className="pj-nav-btn right"
+            className="flex items-center gap-2 px-5 py-2 border border-neutral-200 rounded-full text-neutral-500 hover:text-neutral-900 hover:border-neutral-900 bg-white hover:bg-neutral-50 transition-colors text-sm"
             onClick={() => changeProject((currentIndex + 1) % projects.length)}
             aria-label="Next project"
           >
             <span>Next</span>
             <span>→</span>
           </button>
-
         </div>
       </div>
 
-      {/* ── Lightbox ── */}
+      {/* Lightbox */}
       {lightboxOpen && (
         <div
-          style={{
-            position: "fixed", inset: 0, zIndex: 50,
-            background: "rgba(0,0,0,.88)", backdropFilter: "blur(4px)",
-            display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem",
-          }}
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
           onClick={() => setLightboxOpen(false)}
         >
           <button
             onClick={() => setLightboxOpen(false)}
             aria-label="Close"
-            style={{ position: "absolute", top: "1.5rem", right: "1.5rem", background: "none", border: "none", color: "rgba(255,255,255,.45)", fontSize: "2rem", cursor: "pointer", lineHeight: 1 }}
-          >×</button>
+            className="absolute top-6 right-6 text-white/50 hover:text-white text-3xl cursor-pointer transition-colors"
+          >
+            &times;
+          </button>
 
           {project.images.length > 1 && (
             <>
               <button
-                onClick={(e) => { e.stopPropagation(); prevImage() }}
-                aria-label="Previous"
-                style={{ position: "absolute", left: "1.5rem", top: "50%", transform: "translateY(-50%)", background: "rgba(255,255,255,.1)", border: "1px solid rgba(255,255,255,.2)", borderRadius: "50%", color: "#fff", width: "42px", height: "42px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "14px" }}
-              >←</button>
-              <button
-                onClick={(e) => { e.stopPropagation(); nextImage() }}
-                aria-label="Next"
-                style={{ position: "absolute", right: "1.5rem", top: "50%", transform: "translateY(-50%)", background: "rgba(255,255,255,.1)", border: "1px solid rgba(255,255,255,.2)", borderRadius: "50%", color: "#fff", width: "42px", height: "42px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "14px" }}
-              >→</button>
+                onClick={(e) => {
+                  e.stopPropagation()
+                  prevImage()
+                }}
+                aria-label="Previous image"
+                className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center cursor-pointer transition-all"
+              >
+                ←
+              </button>
+               <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  nextImage()
+                }}
+                aria-label="Next image"
+                className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center cursor-pointer transition-all"
+              >
+                →
+              </button>
             </>
           )}
 
           <div
-            style={{ position: "relative", width: "100%", maxWidth: "1100px", aspectRatio: "16/9" }}
+            className="relative w-full max-w-5xl aspect-video"
             onClick={(e) => e.stopPropagation()}
           >
-            <Image src={project.images[currentImageIndex]} alt={project.title} fill style={{ objectFit: "contain" }} />
+            <Image src={project.images[currentImageIndex]} alt={project.title} fill className="object-contain" />
           </div>
 
-          <p style={{ position: "absolute", bottom: "1.5rem", left: "50%", transform: "translateX(-50%)", color: "rgba(255,255,255,.3)", fontSize: ".7rem", letterSpacing: ".12em", whiteSpace: "nowrap" }}>
+          <p className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/40 text-xs tracking-wider">
             {pad(currentImageIndex + 1)} / {pad(project.images.length)}
           </p>
         </div>
