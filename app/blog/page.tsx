@@ -123,7 +123,7 @@ export default function BlogPage() {
 
         {/* Right Side - Blog Posts (scrollable) */}
         <div className="w-full md:w-2/3 md:ml-auto p-6 md:p-12 md:px-20 overflow-y-auto md:h-screen md:pt-10">
-          <div className="space-y-12 max-w-[620px] mx-auto md:mx-0">
+          <div className="space-y-12 max-w-3xl mx-auto">
             {posts.map((post, index) => (
               <article key={index} className="border-b border-neutral-200 pt-0 pb-10 md:pb-14 last:border-b-0">
                 {/* Title */}
