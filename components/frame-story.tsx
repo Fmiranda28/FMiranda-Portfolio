@@ -169,7 +169,6 @@ export function FrameStory({ onComplete }: FrameStoryProps) {
     }
   }, [])
 
-  const percent = Math.round((frame / FRAME_COUNT) * 100)
   const introTextProgress = Math.min(1, Math.max(0, (frame - 1) / 28))
   const insideTextProgress = Math.min(1, Math.max(0, (frame - FIRST_STOP) / 28))
 
@@ -213,11 +212,6 @@ export function FrameStory({ onComplete }: FrameStoryProps) {
           <br />
           Fernando Miranda
         </h1>
-      </div>
-      <div className="absolute right-5 top-5 font-mono text-[11px] uppercase tracking-[0.16em] text-white/80 md:right-8 md:top-8">
-        <span>frame {frame}</span>
-        <span className="mx-2 text-white/35">/</span>
-        <span>{percent}%</span>
       </div>
       <div className="absolute bottom-8 left-5 flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-white/70 md:bottom-10 md:left-8">
         <span className="h-px w-8 bg-white/60" />
