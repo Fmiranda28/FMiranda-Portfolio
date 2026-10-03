@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import DottedGlobe from "@/components/globe/earth"
 
 const posts = [
@@ -70,6 +70,10 @@ const posts = [
 export default function BlogPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    window.sessionStorage.setItem("skip-frame-story", "1")
+  }, [])
 
   return (
     <main className="bg-white min-h-screen">

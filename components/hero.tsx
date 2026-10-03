@@ -201,7 +201,7 @@ export function Hero() {
   }, [displayText, isDeleting, currentRole])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-white">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center bg-white">
       <AnimatedDotGrid />
 
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20 px-6 max-w-5xl mx-auto">

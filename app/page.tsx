@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Nav } from "@/components/nav"
 import { FrameStory } from "@/components/frame-story"
 import { Hero } from "@/components/hero"
@@ -14,9 +14,16 @@ import { Footer } from "@/components/footer"
 export default function Home() {
   const [hasEntered, setHasEntered] = useState(false)
 
+  useEffect(() => {
+    if (window.sessionStorage.getItem("skip-frame-story") !== "1") return
+
+    window.sessionStorage.removeItem("skip-frame-story")
+    setHasEntered(true)
+  }, [])
+
   return (
     <main className="bg-white">
-      <FrameStory onComplete={() => setHasEntered(true)} />
+      {!hasEntered && <FrameStory onComplete={() => setHasEntered(true)} />}
       {hasEntered && (
         <>
           <Nav />

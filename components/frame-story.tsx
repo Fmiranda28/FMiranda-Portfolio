@@ -26,6 +26,8 @@ export function FrameStory({ onComplete }: FrameStoryProps) {
   const stageRef = useRef(0)
   const isAnimatingRef = useRef(false)
   const animationFrameRef = useRef(0)
+  const finalRevealTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const heroCompleteTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const touchStartRef = useRef(0)
   const isLoadingRef = useRef(true)
 
@@ -90,14 +92,14 @@ export function FrameStory({ onComplete }: FrameStoryProps) {
     const handleResize = () => drawFrame(frameRef.current)
     window.addEventListener("resize", handleResize)
 
-    const animateTo = (targetFrame: number, duration: number) => {
+    const animateTo = (targetFrame: number, duration: number, easeOut = true) => {
       isAnimatingRef.current = true
       const startFrame = frameRef.current
       const startTime = performance.now()
 
       const tick = (now: number) => {
         const progress = Math.min(1, (now - startTime) / duration)
-        const easedProgress = 1 - Math.pow(1 - progress, 3)
+        const easedProgress = easeOut ? 1 - Math.pow(1 - progress, 3) : progress
         const nextFrame = Math.round(startFrame + (targetFrame - startFrame) * easedProgress)
         frameRef.current = nextFrame
         setFrame(nextFrame)
@@ -114,8 +116,10 @@ export function FrameStory({ onComplete }: FrameStoryProps) {
         stageRef.current = targetFrame === FIRST_STOP ? 1 : 2
         setStage(targetFrame === FIRST_STOP ? 1 : 2)
         if (targetFrame === FRAME_COUNT) {
-          onComplete()
-          setIsRevealing(true)
+          finalRevealTimeoutRef.current = setTimeout(() => {
+            setIsRevealing(true)
+            heroCompleteTimeoutRef.current = setTimeout(onComplete, 1000)
+          }, 1000)
         }
       }
 
@@ -126,9 +130,9 @@ export function FrameStory({ onComplete }: FrameStoryProps) {
       if (isLoadingRef.current || isAnimatingRef.current || stageRef.current === 2) return
 
       if (stageRef.current === 0) {
-        animateTo(FIRST_STOP, 1600)
+        animateTo(FIRST_STOP, 2200, false)
       } else {
-        animateTo(FRAME_COUNT, 7000)
+        animateTo(FRAME_COUNT, 6000, false)
       }
     }
 
@@ -158,6 +162,8 @@ export function FrameStory({ onComplete }: FrameStoryProps) {
 
     return () => {
       window.cancelAnimationFrame(animationFrameRef.current)
+      if (finalRevealTimeoutRef.current) clearTimeout(finalRevealTimeoutRef.current)
+      if (heroCompleteTimeoutRef.current) clearTimeout(heroCompleteTimeoutRef.current)
       window.removeEventListener("wheel", handleWheel)
       window.removeEventListener("touchstart", handleTouchStart)
       window.removeEventListener("touchmove", handleTouchMove)
