@@ -2,12 +2,13 @@
 
 import { useEffect, useRef, useState } from "react"
 
-const FRAME_COUNT = 143
-const FIRST_STOP = 36
-const FINAL_MESSAGE_FRAME = 134
+const FRAME_COUNT = 215
+const FIRST_STOP = 55
+const FINAL_MESSAGE_FRAME = 206
+const ASSET_COOKIE = "frame-assets-loaded-v2"
 
 function framePath(frame: number) {
-  return `/images/FRAMES/frame_${String(frame).padStart(3, "0")}.webp`
+  return `/images/Frames_Miranda/frame_${String(frame).padStart(3, "0")}.webp`
 }
 
 interface FrameStoryProps {
@@ -37,7 +38,7 @@ export function FrameStory({ onComplete }: FrameStoryProps) {
       return image
     })
 
-    const hasLoadedCookie = document.cookie.split("; ").some((cookie) => cookie.startsWith("frame-assets-loaded="))
+    const hasLoadedCookie = document.cookie.split("; ").some((cookie) => cookie.startsWith(`${ASSET_COOKIE}=`))
     if (hasLoadedCookie) {
       isLoadingRef.current = false
       setIsLoading(false)
@@ -74,7 +75,7 @@ export function FrameStory({ onComplete }: FrameStoryProps) {
         setLoadingProgress(Math.round((loadedAssets / FRAME_COUNT) * 100))
       }
       if (loadedAssets === FRAME_COUNT) {
-        document.cookie = "frame-assets-loaded=1; max-age=31536000; path=/; SameSite=Lax"
+        document.cookie = `${ASSET_COOKIE}=1; max-age=31536000; path=/; SameSite=Lax`
         isLoadingRef.current = false
         setIsLoading(false)
       }
@@ -130,9 +131,9 @@ export function FrameStory({ onComplete }: FrameStoryProps) {
       if (isLoadingRef.current || isAnimatingRef.current || stageRef.current === 2) return
 
       if (stageRef.current === 0) {
-        animateTo(FIRST_STOP, 2200, false)
+        animateTo(FIRST_STOP, 1900, false)
       } else {
-        animateTo(FRAME_COUNT, 6000, false)
+        animateTo(FRAME_COUNT, 5200, false)
       }
     }
 
@@ -196,12 +197,12 @@ export function FrameStory({ onComplete }: FrameStoryProps) {
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.38),transparent_30%,rgba(0,0,0,0.22))]" />
 
       {isLoading && (
-        <div className="absolute inset-0 z-[70] flex flex-col items-center justify-center gap-5 bg-neutral-950 px-6 text-white">
-          <p className="text-xs uppercase tracking-[0.24em] text-white/60">Preparing the sequence</p>
-          <div className="h-px w-48 bg-white/20 sm:w-64">
-            <div className="h-full bg-white transition-[width] duration-200" style={{ width: `${loadingProgress}%` }} />
+        <div className="absolute inset-0 z-[70] flex flex-col items-center justify-center gap-5 bg-white px-6 text-neutral-900">
+          <p className="text-xs uppercase tracking-[0.24em] text-neutral-500">Preparing the sequence</p>
+          <div className="h-px w-48 bg-neutral-200 sm:w-64">
+            <div className="h-full bg-neutral-900 transition-[width] duration-200" style={{ width: `${loadingProgress}%` }} />
           </div>
-          <p className="font-mono text-xs tabular-nums text-white/80">{loadingProgress}%</p>
+          <p className="font-mono text-xs tabular-nums text-neutral-700">{loadingProgress}%</p>
         </div>
       )}
 
