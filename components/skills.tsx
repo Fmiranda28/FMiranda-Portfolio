@@ -1,3 +1,8 @@
+"use client"
+
+import { useState } from "react"
+import { Folder } from "lucide-react"
+
 const skills = [
   {
     category: "Frontend",
@@ -9,62 +14,157 @@ const skills = [
   },
   {
     category: "IoT & Embedded Systems",
+    fileName: "iot.md",
     items: ["Arduino", "ESP32", "C++", "MicroPython"],
   },
   {
     category: "Game Development",
+    fileName: "games.md",
     items: ["Unity", "C#"],
   },
   {
     category: "Devops",
+    fileName: "devops.md",
     items: ["Digital Ocean", "Docker"],
   },
   {
     category: "Tools & Management",
+    fileName: "tools.md",
     items: ["Git", "GitHub", "Figma", "Jira", "Trello"],
   },
   {
     category: "AI Tools",
+    fileName: "ai.md",
     items: ["ChatGPT", "Claude", "Gemini", "v0", "GitHub Copilot", "Stitch"],
   },
 ]
 
+const skillLogoUrls: Record<string, string> = {
+  HTML: "https://cdn.simpleicons.org/html5",
+  CSS: "https://cdn.simpleicons.org/css",
+  "Tailwind CSS": "https://cdn.simpleicons.org/tailwindcss",
+  Bootstrap: "https://cdn.simpleicons.org/bootstrap",
+  JavaScript: "https://cdn.simpleicons.org/javascript",
+  TypeScript: "https://cdn.simpleicons.org/typescript",
+  React: "https://cdn.simpleicons.org/react",
+  "Next.js": "https://cdn.simpleicons.org/nextdotjs",
+  Vite: "https://cdn.simpleicons.org/vite",
+  Flutter: "https://cdn.simpleicons.org/flutter",
+  Dart: "https://cdn.simpleicons.org/dart",
+  PHP: "https://cdn.simpleicons.org/php",
+  Laravel: "https://cdn.simpleicons.org/laravel",
+  Python: "https://cdn.simpleicons.org/python",
+  FastAPI: "https://cdn.simpleicons.org/fastapi",
+  "Node.js": "https://cdn.simpleicons.org/nodedotjs",
+  MySQL: "https://cdn.simpleicons.org/mysql",
+  PostgreSQL: "https://cdn.simpleicons.org/postgresql",
+  Firebase: "https://cdn.simpleicons.org/firebase",
+  WebSocket: "https://api.iconify.design/mdi/connection.svg",
+  Supabase: "https://cdn.simpleicons.org/supabase",
+  Arduino: "https://cdn.simpleicons.org/arduino",
+  ESP32: "https://cdn.simpleicons.org/espressif",
+  "C++": "https://cdn.simpleicons.org/cplusplus",
+  MicroPython: "https://cdn.simpleicons.org/micropython",
+  Unity: "https://cdn.simpleicons.org/unity",
+  "C#": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg",
+  "Digital Ocean": "https://cdn.simpleicons.org/digitalocean",
+  Docker: "https://cdn.simpleicons.org/docker",
+  Git: "https://cdn.simpleicons.org/git",
+  GitHub: "https://cdn.simpleicons.org/github",
+  Figma: "https://cdn.simpleicons.org/figma",
+  Jira: "https://cdn.simpleicons.org/jira",
+  Trello: "https://cdn.simpleicons.org/trello",
+  ChatGPT: "https://api.iconify.design/mdi/robot-outline.svg",
+  Claude: "https://cdn.simpleicons.org/anthropic",
+  Gemini: "https://cdn.simpleicons.org/googlegemini",
+  v0: "https://cdn.simpleicons.org/v0",
+  "GitHub Copilot": "https://cdn.simpleicons.org/githubcopilot",
+  Stitch: "https://cdn.simpleicons.org/google",
+}
+
 export function Skills() {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const activeSkill = skills[activeIndex]
+
   return (
-    <section id="skills" className="relative py-32 px-6 bg-neutral-50">
-      {/* Subtle grid pattern */}
-      <div 
-        className="absolute inset-0 opacity-50"
-        style={{
-          backgroundImage: "url('/images/grid-lines.png')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "400px",
-        }}
-      />
+    <section id="skills" className="border-y border-neutral-200 bg-white px-4 py-16 sm:px-6">
+      <div className="mx-auto max-w-5xl">
+        <div className="mb-6 flex items-end justify-between border-b border-neutral-200 pb-3">
+          <div>
+            <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-neutral-400">
+              // active directory: skills
+            </p>
+            <h2 className="font-mono text-sm font-medium uppercase tracking-[0.18em] text-neutral-900">
+              Skills & Abilities
+            </h2>
+          </div>
+          <span className="font-mono text-xs text-neutral-400">
+            {String(activeIndex + 1).padStart(2, "0")} / {String(skills.length).padStart(2, "0")}
+          </span>
+        </div>
 
-      <div className="relative z-10 max-w-3xl mx-auto">
-        <p className="text-xs text-neutral-400 uppercase tracking-widest mb-12">
-          Skills & Abilities
-        </p>
+        <div className="grid overflow-hidden border border-neutral-200 bg-white md:grid-cols-[185px_1fr]">
+          <aside className="border-b border-neutral-200 bg-white p-3 md:border-b-0 md:border-r">
+            <p className="mb-3 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400">
+              Directories
+            </p>
+            <nav
+              className="flex max-w-full snap-x gap-1 overflow-x-auto overflow-y-hidden pb-1 [scrollbar-width:thin] md:block md:overflow-visible md:pb-0"
+              aria-label="Skill directories"
+            >
+              {skills.map((skill, index) => (
+                <button
+                  key={skill.category}
+                  type="button"
+                  onClick={() => setActiveIndex(index)}
+                  className={`flex min-w-max snap-start items-center gap-2 border-l-2 px-2.5 py-1.5 text-left font-mono text-[11px] transition-colors md:w-full ${
+                    index === activeIndex
+                      ? "border-neutral-900 bg-neutral-50 font-medium text-neutral-900"
+                      : "border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-900"
+                  }`}
+                  aria-current={index === activeIndex ? "page" : undefined}
+                >
+                  <Folder className="h-4 w-4 shrink-0 text-[#d1a84b]" strokeWidth={1.8} />
+                  {skill.fileName ?? `${skill.category.toLowerCase().replaceAll(" ", "-")}.md`}
+                </button>
+              ))}
+            </nav>
+          </aside>
 
-        <div className="space-y-12">
-          {skills.map((skill) => (
-            <div key={skill.category}>
-              <h3 className="text-sm font-medium text-neutral-900 mb-4">
-                {skill.category}
+          <div className="min-w-0">
+            <div className="border-b border-neutral-200 px-5 py-4 md:px-7">
+              <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400">
+                // active file: {activeSkill.category.toLowerCase().replaceAll(" ", "-")}.md
+              </p>
+              <h3 className="text-2xl font-light tracking-tight text-neutral-950 md:text-4xl">
+                {activeSkill.category}.
               </h3>
-              <div className="flex flex-wrap gap-3">
-                {skill.items.map((item) => (
-                  <span
+            </div>
+
+            <div className="p-5 md:p-7">
+              <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400">
+                Files
+              </p>
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+                {activeSkill.items.map((item) => (
+                  <div
                     key={item}
-                    className="text-sm text-neutral-500 px-4 py-2 bg-white border border-neutral-100"
+                    className="flex min-w-0 items-center gap-3 border border-neutral-200 px-3 py-3 text-sm text-neutral-600 transition-colors hover:border-neutral-900 hover:text-neutral-900"
                   >
-                    {item}
-                  </span>
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center bg-neutral-50 p-1.5">
+                      <img
+                        src={skillLogoUrls[item]}
+                        alt={`${item} logo`}
+                        className="h-full w-full object-contain"
+                        loading="lazy"
+                      />
+                    </span>
+                    <span className="truncate">{item}</span>
+                  </div>
                 ))}
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>
