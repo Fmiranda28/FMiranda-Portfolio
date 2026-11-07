@@ -104,20 +104,21 @@ export function Skills() {
         </div>
 
         <div className="grid overflow-hidden border border-neutral-200 bg-white md:grid-cols-[185px_1fr]">
-          <aside className="border-b border-neutral-200 bg-white p-3 md:border-b-0 md:border-r">
+          <aside className="min-w-0 border-b border-neutral-200 bg-white p-3 md:border-b-0 md:border-r">
             <p className="mb-3 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400">
               Directories
             </p>
             <nav
-              className="flex max-w-full snap-x gap-1 overflow-x-auto overflow-y-hidden pb-1 [scrollbar-width:thin] md:block md:overflow-visible md:pb-0"
+              className="flex w-full max-w-[calc(100vw-2rem)] min-w-0 snap-x flex-nowrap touch-pan-x gap-1 overflow-x-auto overflow-y-hidden overscroll-x-contain pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:block md:max-w-none md:overflow-visible md:pb-0"
               aria-label="Skill directories"
+              style={{ WebkitOverflowScrolling: "touch" }}
             >
               {skills.map((skill, index) => (
                 <button
                   key={skill.category}
                   type="button"
                   onClick={() => setActiveIndex(index)}
-                  className={`flex min-w-max snap-start items-center gap-2 border-l-2 px-2.5 py-1.5 text-left font-mono text-[11px] transition-colors md:w-full ${
+                  className={`flex min-w-max shrink-0 snap-start items-center gap-2 border-l-2 px-2.5 py-1.5 text-left font-mono text-[11px] transition-colors md:w-full ${
                     index === activeIndex
                       ? "border-neutral-900 bg-neutral-50 font-medium text-neutral-900"
                       : "border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-900"
@@ -145,13 +146,13 @@ export function Skills() {
               <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400">
                 Files
               </p>
-              <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+              <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3 md:grid-cols-4">
                 {activeSkill.items.map((item) => (
                   <div
                     key={item}
-                    className="flex min-w-0 items-center gap-3 border border-neutral-200 px-3 py-3 text-sm text-neutral-600 transition-colors hover:border-neutral-900 hover:text-neutral-900"
+                    className="flex min-w-0 items-center gap-2 border border-neutral-200 px-2 py-2 text-xs text-neutral-600 transition-colors hover:border-neutral-900 hover:text-neutral-900"
                   >
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center bg-neutral-50 p-1.5">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center bg-neutral-50 p-1">
                       <img
                         src={skillLogoUrls[item]}
                         alt={`${item} logo`}
