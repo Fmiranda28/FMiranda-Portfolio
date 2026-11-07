@@ -6,6 +6,13 @@ import { useEffect, useState } from "react"
 import DottedGlobe from "@/components/globe/earth"
 
 const posts = [
+    {
+      title: "Fernando Meets with PhD Doctors to Become a Speaker",
+      date: "November 6, 2026",
+      description:
+        "Fernando met with PhD doctors to discuss his journey, exchange ideas, and explore opportunities to become a speaker and share his experience with a wider audience.",
+      image: "/blog-images/doctors.jpg",
+    },
 
     {
       title: "Project Management Fundamentals Course Completion",
